@@ -41,7 +41,6 @@ raw1 %>%
 
 創造出age(年齡)變項，用受訪者西元出生年減去1911。
 ```{r age, message=FALSE, warning=FALSE, results='hide'}
-labelsx=c("25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74")
 wang %>%
   drop_na(birth_y)->wang
 wang$age<- (wang$period-1911)-wang$birth_y

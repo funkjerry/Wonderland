@@ -12,9 +12,10 @@ library(plotly)
 
 ## 生活快樂感
 
-創造一個list，包覆所有的圖片，方便未來的儀表板呈現，使用ggplot2套件與plotly套件，以年齡為X軸，以平均生活快樂感為Y軸，並以出生年代分群來繪製折線圖。
+創造一個list，包覆所有的圖片，方便未來的儀表板呈現，設定年齡區間(5歲一組)為X軸標籤，使用ggplot2套件與plotly套件，以年齡為X軸，以平均生活快樂感為Y軸，並以出生年代分群來繪製折線圖。
 ```{r, message=FALSE, warning=FALSE}
 graph5<-list()
+labelsx=c("25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74")
 ggplotly(
   ggplot(happy, aes(x=birth_g, y=point, group=birth_p, color=birth_p, text = paste(
   "Period:", birth_p,
