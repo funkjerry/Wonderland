@@ -11,15 +11,15 @@ browseURL(url)
 
 rio 是一個幫助匯入不同檔案格式的套件，dplyr、tidyr 均是幫助資料清理的套件
 
-```{r pack, .cap='匯入需要的套件', out.width='90%',  message=FALSE, warning=FALSE, echo=FALSE}
+```{r pack, .cap='匯入需要的套件', out.width='90%', message=FALSE, warning=FALSE, echo=FALSE}
 library(rio)
 library(dplyr)
 library(tidyr)
 ```
 
 匯入.sav檔案
-```{r hello, .cap='匯入sav檔', out.width='90%', echo=False}
-import("C:/Users/steve/Downloads/RIRRR.sav")->raw1
+```{r hello, .cap='匯入sav檔', out.width='90%', message=FALSE}
+import("https://raw.githubusercontent.com/funkjerry/psfd_data/main/RIRRR.sav")->raw1
 ```
 
 隨機取十位受訪者的資料
