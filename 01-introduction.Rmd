@@ -6,7 +6,6 @@
 
 ```{r file, out.width='90%' ,message=FALSE, warning=FALSE, results='hide'}
 url <- "https://raw.githubusercontent.com/funkjerry/psfd_data/main/RIRRR.sav"
-browseURL(url)
 ```
 
 rio 是一個幫助匯入不同檔案格式的套件，dplyr、tidyr 均是幫助資料清理的套件
