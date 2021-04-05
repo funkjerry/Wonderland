@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 The pool of tears | 學習使用 R Markdown 寫書</title>
+  <title>Chapter 1 R 資料處理 | 學習使用 R Markdown 寫書</title>
   <meta name="description" content="Get to know me ~" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 The pool of tears | 學習使用 R Markdown 寫書" />
+  <meta property="og:title" content="Chapter 1 R 資料處理 | 學習使用 R Markdown 寫書" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 The pool of tears | 學習使用 R Markdown 寫書" />
+  <meta name="twitter:title" content="Chapter 1 R 資料處理 | 學習使用 R Markdown 寫書" />
   
   <meta name="twitter:description" content="Get to know me ~" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intro.html"/>
-<link rel="next" href="a-caucus-race-and-a-long-tale.html"/>
+<link rel="prev" href="author.html"/>
+<link rel="next" href="the-pool-of-tears.html"/>
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
@@ -162,8 +162,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-pool-of-tears" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> The pool of tears</h1>
+<div id="intro" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> R 資料處理</h1>
+<p>首先，先去下載資料，此資料來源是PSFD華人家庭動態調查，我目前將主樣本的資料合併成一個.sav的檔案，可由此下載</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="intro.html#cb1-1"></a>url &lt;-<span class="st"> &quot;https://raw.githubusercontent.com/funkjerry/psfd_data/main/RIRRR.sav&quot;</span></span>
+<span id="cb1-2"><a href="intro.html#cb1-2"></a><span class="kw">browseURL</span>(url)</span></code></pre></div>
+<p>rio 是一個幫助匯入不同檔案格式的套件</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="intro.html#cb2-1"></a><span class="kw">library</span>(rio)</span>
+<span id="cb2-2"><a href="intro.html#cb2-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="intro.html#cb6-1"></a><span class="kw">library</span>(plotly)</span></code></pre></div>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;plotly&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     last_plot</code></pre>
+<pre><code>## The following object is masked from &#39;package:rio&#39;:
+## 
+##     export</code></pre>
+<pre><code>## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter</code></pre>
+<pre><code>## The following object is masked from &#39;package:graphics&#39;:
+## 
+##     layout</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="intro.html#cb13-1"></a><span class="kw">library</span>(ggplot2)</span></code></pre></div>
+<p>***<code>{r hello, fig.cap='匯入sav檔', out.width='90%'} import("RIRRR.sav")-&gt;Kuo</code></p>
 
 </div>
             </section>
@@ -171,8 +203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-caucus-race-and-a-long-tale.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="author.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-pool-of-tears.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
@@ -203,7 +235,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/funkjerry/Wonderland/edit/master/02-tears.Rmd",
+"link": "https://github.com/funkjerry/Wonderland/edit/master/01-introduction.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -211,7 +243,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/funkjerry/Wonderland/blob/master/02-tears.Rmd",
+"link": "https://github.com/funkjerry/Wonderland/blob/master/01-introduction.Rmd",
 "text": null
 },
 "download": null,

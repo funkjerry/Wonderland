@@ -1,2 +1,63 @@
-# The pool of tears
+#  資料視覺化{#wind}
 
+此章節主要注重在於資料的視覺化呈現，未來會增加儀表表與互動式的功能
+
+
+## 繪圖套件
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(plotly)
+```
+
+## 生活快樂感
+
+創造一個list，包覆所有的圖片，方便未來的儀表板呈現，使用ggplot2套件與plotly套件，以年齡為X軸，以平均生活快樂感為Y軸，並以出生年代分群來繪製折線圖。
+```{r}
+graph5<-list()
+ggplotly(
+  ggplot(happy, aes(x=birth_g, y=point, group=birth_p, color=birth_p, text = paste(
+  "Period:", birth_p,
+  "<br>N:", n, 
+  "<br>Point:", point)))+
+  geom_line(linetype="solid",alpha=0.4, size=1)+
+  geom_point(size=2,alpha=0.7)+
+  scale_x_discrete(labels=labelsx)+
+  labs(
+    title="主樣本的生活快樂感(出生世代)",
+    x="主樣本年齡",y="平均分數(1 ~ 7分)")+
+  ylim(4,5.5), tooltip = "text"
+  ) %>%
+    layout(legend = list(
+        orientation = "l"
+        )
+      )->graph5$happy
+
+graph5$happy
+```
+
+
+## 生活幸福感
+
+使用ggplot2套件與plotly套件，以年齡為X軸，以平均生活幸福感為Y軸，並以出生年代分群來繪製折線圖。
+```{r}
+ggplotly(
+  ggplot(life, aes(x=birth_g, y=point, group=birth_p, color=birth_p, text = paste(
+  "Period:", birth_p,
+  "<br>N:", n, 
+  "<br>Point:", point)))+
+  geom_line(linetype="solid",alpha=0.4, size=1)+
+  geom_point(size=2,alpha=0.7)+
+  scale_x_discrete(labels=labelsx)+
+  labs(
+    title="主樣本的生活過得好不好(出生世代)",
+    x="主樣本年齡",y="平均分數(1 ~ 7分)")+
+  ylim(4,5.5), tooltip = "text"
+  ) %>%
+    layout(legend = list(
+        orientation = "l"
+        )
+      )->graph5$life
+
+graph5$life
+```

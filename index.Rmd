@@ -1,9 +1,32 @@
 --- 
-title: "Steven in Wonderland"
-author: "Steven Wang"
+title: "學習使用 R Markdown 寫書"
+author: "Steven Wang 王先誠"
 date: "`r Sys.Date()`"
+geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
 site: bookdown::bookdown_site
+description: "Get to know me ~"
 ---
 
-# Down the rabbit-hole
+```{r setup, include=FALSE}
+options(
+  htmltools.dir.version = FALSE, formatR.indent = 2, width = 55, digits = 4
+)
 
+# 填上你需要用到的包，如 c('ggplot2', 'dplyr')
+lapply(c('ggplot2', 'dplyr', 'plotly','rio','colorspace' ), function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
+```
+
+# 前言 {-}
+
+  大家好，我是王先誠。目前這是一本我個人的學習紀錄，內容包括R語言( _R programming_ )、 _SPSS_ 、科技部小論文等等，第 \@ref(intro) 章介紹了用R進行資料處理，第 \@ref(wind) 章說了用R進行繪圖，然後是啥......透過電子書的方式，讓我累積自己的作品，檢視自己的成長、參照之前的程式碼，並且持續更新與精進。
+
+## 致謝 {-}
+
+非常感謝我父母從小對我的栽培，以及在大學時在社會學系和經濟學系遇到的老師，啟蒙了我對於資料處理的好奇心並完成了這本書(?
+
+```{block2, type='flushright', html.tag='p'}
+先誠
+於新北市汐止區
+```

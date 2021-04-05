@@ -1,0 +1,230 @@
+--- 
+title: "學習使用 R Markdown 寫書"
+author: "Steven Wang 王先誠"
+date: "`r Sys.Date()`"
+geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
+site: bookdown::bookdown_site
+description: "Get to know me ~"
+---
+
+```{r setup, include=FALSE}
+options(
+  htmltools.dir.version = FALSE, formatR.indent = 2, width = 55, digits = 4
+)
+
+# 填上你需要用到的包，如 c('ggplot2', 'dplyr')
+lapply(c('ggplot2', 'dplyr', 'plotly','rio','colorspace' ), function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
+```
+
+# 前言 {-}
+
+  大家好，我是王先誠。目前這是一本我個人的學習紀錄，內容包括R語言( _R programming_ )、 _SPSS_ 、科技部小論文等等，第 \@ref(intro) 章介紹了用R進行資料處理，第 \@ref(wind) 章說了用R進行繪圖，然後是啥......透過電子書的方式，讓我累積自己的作品，檢視自己的成長、參照之前的程式碼，並且持續更新與精進。
+
+## 致謝 {-}
+
+非常感謝我父母從小對我的栽培，以及在大學時在社會學系和經濟學系遇到的老師，啟蒙了我對於資料處理的好奇心並完成了這本書(?
+
+```{block2, type='flushright', html.tag='p'}
+先誠
+於新北市汐止區
+```
+
+<!--chapter:end:index.Rmd-->
+
+# 作者簡介 {#author .unnumbered}
+
+目前就讀於國立臺北大學的大五學生，雙主修社會學系和經濟學系，預計於110年6月畢業。
+
+
+<!--chapter:end:00-author.Rmd-->
+
+\mainmatter
+
+# R 資料處理 {#intro}
+
+首先，先去下載資料，此資料來源是PSFD華人家庭動態調查，我目前將主樣本的資料合併成一個.sav的檔案，可由此下載
+
+```{r file, out.width='90%'}
+url <- "https://raw.githubusercontent.com/funkjerry/psfd_data/main/RIRRR.sav"
+browseURL(url)
+```
+
+rio 是一個幫助匯入不同檔案格式的套件，dplyr、tidyr 均是幫助資料清理的套件
+
+```{r pack, .cap='匯入需要的套件', out.width='90%', .echo=False}
+library(rio)
+library(dplyr)
+library(tidyr)
+```
+
+匯入.sav檔案
+```{r hello, .cap='匯入sav檔', out.width='90%', .echo=False}
+import("C:/Users/steve/Downloads/RIRRR.sav")->raw1
+```
+
+```{r raw1, fig.cap="你好阿，我是資料圖!"}
+knitr::kable(raw1[sample(nrow(raw1),10),],caption = '從1999到2000年的主樣本中，共有6萬多筆資料，隨機選出10筆',
+  booktabs = TRUE
+)
+```
+
+## 遺漏值處理
+
+使用fill函數將raw1裏面的缺失值依照id(受訪者編號)來回填，fill.direction，會決定回填的優先順序，下例中是先參照下方再參照上方。
+```{r fill, echo=FALSE}
+raw1 %>%
+  group_by(id) %>%
+  fill(scale, birth_y, .direction = "downup") %>%
+  ungroup->wang
+```
+
+創造出age(年齡)變項，用受訪者西元出生年減去1911。
+```{r age, echo=FALSE, warning=FALSE}
+labelsx=c("25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74")
+wang %>%
+  drop_na(birth_y)->wang
+wang$age<- (wang$period-1911)-wang$birth_y
+```
+
+## 資料分群
+
+將受訪者五歲分成一組，從25歲開始，最年長為74歲。
+```{r birth_g, echo=FALSE, warning=FALSE}
+for(i in 1:nrow(wang)){
+  if(wang$age[i] %in% 25:29){
+    wang$birth_g[i]<-"1"
+  }else if (wang$age[i] %in% 30:34){wang$birth_g[i]<-"2"
+  }else if (wang$age[i] %in% 35:39){wang$birth_g[i]<-"3"
+  }else if (wang$age[i] %in% 40:44){wang$birth_g[i]<-"4"
+  }else if (wang$age[i] %in% 45:49){wang$birth_g[i]<-"5"
+  }else if (wang$age[i] %in% 50:54){wang$birth_g[i]<-"6"
+  }else if (wang$age[i] %in% 55:59){wang$birth_g[i]<-"7"
+  }else if (wang$age[i] %in% 60:64){wang$birth_g[i]<-"8"
+  }else if (wang$age[i] %in% 65:69){wang$birth_g[i]<-"9"
+  }else if (wang$age[i] %in% 70:74){wang$birth_g[i]<-"10"
+  }else{wang$birth_g[i]<-NA
+  }
+}
+
+```
+
+將受訪者依照西元出生年代分群，較容易看見重大事件對於該世代的影響。
+```{r birth_period, echo=FALSE, warning=FALSE}
+for(i in 1:nrow(wang)){
+  if(wang$birth_y[i] %in% 23:38){
+    wang$birth_p[i]<-"1949以前"
+  }else if (wang$birth_y[i] %in% 39:45){wang$birth_p[i]<-"1950 - 56"
+  }else if (wang$birth_y[i] %in% 46:52){wang$birth_p[i]<-"1957 - 63"
+  }else if (wang$birth_y[i] %in% 53:59){wang$birth_p[i]<-"1964 - 70"
+  }else if (wang$birth_y[i] %in% 60:65){wang$birth_p[i]<-"1971 - 76"
+  }else if (wang$birth_y[i] %in% 66:72){wang$birth_p[i]<-"1977 - 83"
+  }else if (wang$birth_y[i] %in% 73:80){wang$birth_p[i]<-"1984以後"
+  }else{wang$birth_p[i]<-NA
+  }
+}
+```
+
+### 生活快樂感資料
+
+將未填寫生活快樂感以及在25~74歲以外的受訪者刪去，讓受訪者依照出生年區間和年齡區間分層，計算他們的平均生活快樂感。
+```{r}
+wang %>%
+  drop_na(happy) %>%
+  group_by(birth_p, birth_g) %>%
+  summarise(point=mean(happy),n=n())->happy
+
+happy %>%
+  drop_na(birth_g)->happy
+as.numeric(happy$birth_g)->happy$birth_g
+as.factor(happy$birth_g)->happy$birth_g
+as.factor(happy$birth_p)->happy$birth_p
+happy$point <- round(happy$point, digits = 2)
+```
+### 生活幸福感資料
+
+將未填寫生活幸福感以及在25~74歲以外的受訪者刪去，讓受訪者依照出生年區間和年齡區間分層，計算他們的平均生活幸福感。
+```{r}
+wang %>%
+  drop_na(life) %>%
+  group_by(birth_p, birth_g) %>%
+  summarise(point=mean(life),n=n())->life
+
+life %>%
+  drop_na(birth_g)->life
+as.numeric(life$birth_g)->life$birth_g
+as.factor(life$birth_g)->life$birth_g
+as.factor(life$birth_p)->life$birth_p
+life$point <- round(life$point, digits = 2)
+levels(life$birth_p)
+```
+
+<!--chapter:end:01-introduction.Rmd-->
+
+#  資料視覺化{#wind}
+
+此章節主要注重在於資料的視覺化呈現，未來會增加儀表表與互動式的功能
+
+
+## 繪圖套件
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(plotly)
+```
+
+## 生活快樂感
+
+創造一個list，包覆所有的圖片，方便未來的儀表板呈現，使用ggplot2套件與plotly套件，以年齡為X軸，以平均生活快樂感為Y軸，並以出生年代分群來繪製折線圖。
+```{r}
+graph5<-list()
+ggplotly(
+  ggplot(happy, aes(x=birth_g, y=point, group=birth_p, color=birth_p, text = paste(
+  "Period:", birth_p,
+  "<br>N:", n, 
+  "<br>Point:", point)))+
+  geom_line(linetype="solid",alpha=0.4, size=1)+
+  geom_point(size=2,alpha=0.7)+
+  scale_x_discrete(labels=labelsx)+
+  labs(
+    title="主樣本的生活快樂感(出生世代)",
+    x="主樣本年齡",y="平均分數(1 ~ 7分)")+
+  ylim(4,5.5), tooltip = "text"
+  ) %>%
+    layout(legend = list(
+        orientation = "l"
+        )
+      )->graph5$happy
+
+graph5$happy
+```
+
+
+## 生活幸福感
+
+使用ggplot2套件與plotly套件，以年齡為X軸，以平均生活幸福感為Y軸，並以出生年代分群來繪製折線圖。
+```{r}
+ggplotly(
+  ggplot(life, aes(x=birth_g, y=point, group=birth_p, color=birth_p, text = paste(
+  "Period:", birth_p,
+  "<br>N:", n, 
+  "<br>Point:", point)))+
+  geom_line(linetype="solid",alpha=0.4, size=1)+
+  geom_point(size=2,alpha=0.7)+
+  scale_x_discrete(labels=labelsx)+
+  labs(
+    title="主樣本的生活過得好不好(出生世代)",
+    x="主樣本年齡",y="平均分數(1 ~ 7分)")+
+  ylim(4,5.5), tooltip = "text"
+  ) %>%
+    layout(legend = list(
+        orientation = "l"
+        )
+      )->graph5$life
+
+graph5$life
+```
+
+<!--chapter:end:02-tears.Rmd-->
+
