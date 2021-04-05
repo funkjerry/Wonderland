@@ -23,11 +23,12 @@ import("https://raw.githubusercontent.com/funkjerry/psfd_data/main/RIRRR.sav")->
 ```
 
 隨機取十位受訪者的資料
-```{r nice-tab, fig.cap="你好阿，我是資料圖!,tidy=FALSE}
-knitr::kable(raw1[sample(nrow(raw1),10),],caption = '從1999到2000年的主樣本中，共有6萬多筆資料，隨機選出10筆',
+```{r nice-tab, fig.cap="你好阿，我是資料圖!", out.width='90%', tidy=FALSE}
+knitr::kable(
+  raw1[sample(nrow(raw1),10),],
+  caption = '從1999到2000年的主樣本中，共有6萬多筆資料，隨機選出10筆',
   booktabs = TRUE
 )
-
 ```
 
 ## 遺漏值處理
