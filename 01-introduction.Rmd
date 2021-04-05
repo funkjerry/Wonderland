@@ -4,14 +4,14 @@
 
 首先，先去下載資料，此資料來源是PSFD華人家庭動態調查，我目前將主樣本的資料合併成一個.sav的檔案，可由此下載
 
-```{r file, out.width='90%'}
+```{r file, out.width='90%' ,message=FALSE, warning=FALSE, results='hide'}
 url <- "https://raw.githubusercontent.com/funkjerry/psfd_data/main/RIRRR.sav"
 browseURL(url)
 ```
 
 rio 是一個幫助匯入不同檔案格式的套件，dplyr、tidyr 均是幫助資料清理的套件
 
-```{r pack, .cap='匯入需要的套件', out.width='90%', message=FALSE, warning=FALSE, echo=FALSE}
+```{r pack, .cap='匯入需要的套件', out.width='90%' ,message=FALSE, warning=FALSE, results='hide'}
 library(rio)
 library(dplyr)
 library(tidyr)
@@ -32,7 +32,7 @@ knitr::kable(raw1[sample(nrow(raw1),10),],caption = '從1999到2000年的主樣�
 ## 遺漏值處理
 
 使用fill函數將raw1裏面的缺失值依照id(受訪者編號)來回填，fill.direction，會決定回填的優先順序，下例中是先參照下方再參照上方。
-```{r fill, message=FALSE, warning=FALSE, echo=FALSE}
+```{r fill, message=FALSE, warning=FALSE, results='hide'}
 raw1 %>%
   group_by(id) %>%
   fill(scale, birth_y, .direction = "downup") %>%
@@ -40,7 +40,7 @@ raw1 %>%
 ```
 
 創造出age(年齡)變項，用受訪者西元出生年減去1911。
-```{r age, echo=FALSE, warning=FALSE}
+```{r age, message=FALSE, warning=FALSE, results='hide'}
 labelsx=c("25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74")
 wang %>%
   drop_na(birth_y)->wang
@@ -50,7 +50,7 @@ wang$age<- (wang$period-1911)-wang$birth_y
 ## 資料分群
 
 將受訪者五歲分成一組，從25歲開始，最年長為74歲。
-```{r birth_g, echo=FALSE, warning=FALSE}
+```{r birth_g, message=FALSE, warning=FALSE, results='hide'}
 for(i in 1:nrow(wang)){
   if(wang$age[i] %in% 25:29){
     wang$birth_g[i]<-"1"
@@ -70,7 +70,7 @@ for(i in 1:nrow(wang)){
 ```
 
 將受訪者依照西元出生年代分群，較容易看見重大事件對於該世代的影響。
-```{r birth_period, echo=FALSE, warning=FALSE}
+```{r birth_period,message=FALSE, warning=FALSE, results='hide'}
 for(i in 1:nrow(wang)){
   if(wang$birth_y[i] %in% 23:38){
     wang$birth_p[i]<-"1949以前"
@@ -88,7 +88,7 @@ for(i in 1:nrow(wang)){
 ### 生活快樂感資料
 
 將未填寫生活快樂感以及在25~74歲以外的受訪者刪去，讓受訪者依照出生年區間和年齡區間分層，計算他們的平均生活快樂感。
-```{r}
+```{r, message=FALSE, warning=FALSE, results='hide'}
 wang %>%
   drop_na(happy) %>%
   group_by(birth_p, birth_g) %>%
@@ -104,7 +104,7 @@ happy$point <- round(happy$point, digits = 2)
 ### 生活幸福感資料
 
 將未填寫生活幸福感以及在25~74歲以外的受訪者刪去，讓受訪者依照出生年區間和年齡區間分層，計算他們的平均生活幸福感。
-```{r}
+```{r,message=FALSE, warning=FALSE, results='hide'}
 wang %>%
   drop_na(life) %>%
   group_by(birth_p, birth_g) %>%
@@ -116,5 +116,4 @@ as.numeric(life$birth_g)->life$birth_g
 as.factor(life$birth_g)->life$birth_g
 as.factor(life$birth_p)->life$birth_p
 life$point <- round(life$point, digits = 2)
-levels(life$birth_p)
 ```

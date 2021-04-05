@@ -5,7 +5,7 @@
 
 ## 繪圖套件
 
-```{r, echo=FALSE}
+```{r, message=FALSE, warning=FALSE, results='hide'}
 library(ggplot2)
 library(plotly)
 ```
@@ -13,7 +13,7 @@ library(plotly)
 ## 生活快樂感
 
 創造一個list，包覆所有的圖片，方便未來的儀表板呈現，使用ggplot2套件與plotly套件，以年齡為X軸，以平均生活快樂感為Y軸，並以出生年代分群來繪製折線圖。
-```{r}
+```{r, message=FALSE, warning=FALSE}
 graph5<-list()
 ggplotly(
   ggplot(happy, aes(x=birth_g, y=point, group=birth_p, color=birth_p, text = paste(
@@ -40,7 +40,7 @@ graph5$happy
 ## 生活幸福感
 
 使用ggplot2套件與plotly套件，以年齡為X軸，以平均生活幸福感為Y軸，並以出生年代分群來繪製折線圖。
-```{r}
+```{r, message=FALSE, warning=FALSE}
 ggplotly(
   ggplot(life, aes(x=birth_g, y=point, group=birth_p, color=birth_p, text = paste(
   "Period:", birth_p,
@@ -61,3 +61,9 @@ ggplotly(
 
 graph5$life
 ```
+
+## 儀表板
+
+
+資料詮釋(待補)
+
