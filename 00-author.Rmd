@@ -1,4 +1,22 @@
+---
+output: html_document
+---
 # 作者簡介 {#author .unnumbered}
 
-目前就讀於國立臺北大學的大五學生，雙主修社會學系和經濟學系，預計於110年6月畢業。
+<html>
+  <head>  
+  </head>
+
+  <body>
+  目前就讀於國立臺北大學的大五學生，雙主修社會學系和經濟學系，預計於110年6月畢業
+<!-- PUT YOUR NAME HERE! -->
+    <nav>Steven/Wang</nav>
+    <!-- IMG -->
+    <img src
+    ="https://lh3.googleusercontent.com/QUxpZ0kppZaf6p0t0pxOGtjPMrzTZFfTBHjy9yTA85MKayhD1FT8KpMxEIOq-hTLSUVc3BxlkrfgCglfJ4EDM1czkMl3_XcEY2rqbMUper4NH6Yqz5pY38ccKf-4hdYVCzuSVuO4P_GmIkuMYhPb7ghH48idrcbuZqGjWuk5tfo9r7cJ_QXtkmiGyd6OOmyq7A9vot3Wqy4ElZoc5e8oNyr4XCUYFL1SmDCjaDV1AV-7qGoakIHAoPFM1QJqs4-7LXUGrdaht9V9TWZNbfRwB9paIDLvj2DE6tmzzJoSB3cy-BwuWJroFcsWXtMt8qlwsseRuKeh6OWnT2bdtGYQ83CgHX8pJ5WStFkXCjRFZLO67TEk4JK_Rv_hb2rl9u018WnPJKCQGzfg1Nx3sLSrVbkXaorV-Q2GiEtMhf4FGMTPH8EZP3dtODkxh76gB0yY1rT8cXtGZTa6QesJIWcUREOtq1t-8QC_eR7M4cEOoO6_SviIds8VArMpDvui5czL7UYn49cDKLIt8kKvI7tOhzszJPNj8Obls6YlSsDQOXeZ6ylCy8GoqadCUKdrRmNy5l3eCbHXcfA2on9gsYkCMuNXLFFSPdJ9TtSN_HOk1Ykp2sTvZQ5Rd5IHl1kv1t31ujqcxytPqY-lwtYmwte5zTQ-gwKjLuyVYX4ioz_CTdo7Et7sF98JKqhDwmoM2QJb-RYo-yNGdzet6J7k0OgDQRAx=w413-h531-no?authuser=0" width="480" height="600"><img     src="https://lh3.googleusercontent.com/z6go2cOU_tTExoqzM0VjjMddBQkFbG8pTRqaZT4zyMjH9IFCLv-Gy4PsY1Bi6dilAtib-RIDBKg_BcJdf9UMAOZ-2UGHDqnzGbIlokRTk2_qzgHE1ElYRGl4dcWp3ZAQNOfF2-skSbzeh9PalTqf4a0qN8RdYTLEiCMsSXi0jzCLyyFn2RgaiGv8Om0JglDKrx-ff6hBmwv8-yiqJLt3C9tC7q1Sum6TsqRDLW9HdNH7dQg8QnULnLcVw8Fa1l-CzTtTtn3EiIWbW08lCCbJiV_ut6ASQ-xYvKrq2N2vGvmTrXZX8s0pq8heoZP_SnupSvKnLyNKArZzsOMuR2yP2bcwcEckc4EDu6DyDQWh5JLpXXqGGY2MmzgiKoksn7ov1yncmmEjvAqBsDuy8AFyT4OcLYHfsfrMdywJ7wyqJCN5htWFVRHst8H23UUCkTBs5S2SiEayK7UdiGacqjRIKLyhEe7nxpc9974X_9YzshZgRC8OZcaNREM8CaN4U8MAWr2xNajq0a_PB_T1x1dv-Vah8JPpwTOdzA1NK75TDPbDM2O20nng-NnAx725-7gFpSRdYfHJtzvnJ_M4m_I_3IfPoRXY_SZiRFXmV7lB3JG0frr1bRuSfiDQcSRkojFQMplRZycHxsijEsgrSmZZ2gQ336Lc69yG9ndncDqXIGRxOXS6ntXlJYXwL6ZgWv9njXZ99JO8nfFcf__DyE8LjQFY=s800-no?authuser=0" width="480" height="480">
+
+  </body>
+</html>
+
+
 
