@@ -11,17 +11,18 @@ browseURL(url)
 
 rio 是一個幫助匯入不同檔案格式的套件，dplyr、tidyr 均是幫助資料清理的套件
 
-```{r pack, .cap='匯入需要的套件', out.width='90%', .echo=False}
+```{r pack, .cap='匯入需要的套件', out.width='90%',  message=FALSE, warning=FALSE, echo=FALSE}
 library(rio)
 library(dplyr)
 library(tidyr)
 ```
 
 匯入.sav檔案
-```{r hello, .cap='匯入sav檔', out.width='90%', .echo=False}
+```{r hello, .cap='匯入sav檔', out.width='90%', echo=False}
 import("C:/Users/steve/Downloads/RIRRR.sav")->raw1
 ```
 
+隨機取十位受訪者的資料
 ```{r raw1, fig.cap="你好阿，我是資料圖!"}
 knitr::kable(raw1[sample(nrow(raw1),10),],caption = '從1999到2000年的主樣本中，共有6萬多筆資料，隨機選出10筆',
   booktabs = TRUE
@@ -31,7 +32,7 @@ knitr::kable(raw1[sample(nrow(raw1),10),],caption = '從1999到2000年的主樣�
 ## 遺漏值處理
 
 使用fill函數將raw1裏面的缺失值依照id(受訪者編號)來回填，fill.direction，會決定回填的優先順序，下例中是先參照下方再參照上方。
-```{r fill, echo=FALSE}
+```{r fill, message=FALSE, warning=FALSE, echo=FALSE}
 raw1 %>%
   group_by(id) %>%
   fill(scale, birth_y, .direction = "downup") %>%

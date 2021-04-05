@@ -53,7 +53,7 @@ browseURL(url)
 
 rio 是一個幫助匯入不同檔案格式的套件，dplyr、tidyr 均是幫助資料清理的套件
 
-```{r pack, .cap='匯入需要的套件', out.width='90%', .echo=False}
+```{r pack, .cap='匯入需要的套件', out.width='90%',  message=FALSE, warning=FALSE, echo=FALSE}
 library(rio)
 library(dplyr)
 library(tidyr)
