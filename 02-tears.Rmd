@@ -65,6 +65,10 @@ graph5$life
 
 ## 儀表板
 
-
 資料詮釋(待補)
+下面為之前畫過的靜態儀表板
+```{r}
+browseURL("https://bookdown.org/steven67889110/cohort3/")
+```
+
 
